@@ -15,7 +15,7 @@
 
     <h1> Tema para a festa de fim de ano.</h1>
     <br>
-    <form method="post" action="conexao.php">
+    <form method="post" action="send.php">
         <td>
             <input type="radio" name="temas" value="1">Circo 
             <input type="radio" name="temas"value="2">Cinema 
@@ -26,31 +26,38 @@
     </form>
     </center>
 
-    <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "enquete365";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+<?php
+include "conecta.php";
 
 $sql = "SELECT ID, temas FROM temas";
-$result = $conn->query($sql);
+$result = $conexao->query($sql);
+
+$circo = 0;
+$cinema = 0;
+$medieval = 0;
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["ID"]. " - Temas: " . $row["temas"]. " <br>";
+        switch ($row["temas"]) {
+            case 1:
+                $circo++;
+                break;
+            case 2:
+                $cinema++;
+                break;
+            case 3:
+                $medieval++;
+                break;
+            default:
+                break;
+        }
     }
+    echo "Votos: <br> Circo: $circo <br> Cinema: $cinema <br> Medieval: $medieval";
 } else {
     echo "0 results";
 }
-$conn->close();
+$conexao->close();
 ?>    
 </body>
 

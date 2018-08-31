@@ -5,9 +5,8 @@ $temas = $_POST["temas"];
 $sql = "INSERT INTO temas (temas) VALUES ('$temas')";
 
 
-if ($conexao->query($sql) === TRUE) {
+if ($conexao->query($sql)) {
     
-    echo "Voto Computado!";
     header("location: index.php");
    
   // $sql = "INSERT INTO 'temas' ('temas') VALUES ('temas')";
@@ -15,6 +14,5 @@ if ($conexao->query($sql) === TRUE) {
     echo "Deu error: " . $sql . "<br>" . $conexao->error;
 }
 $conexao->close();
-
 
 ?>
