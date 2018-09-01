@@ -2,17 +2,23 @@
 include "conecta.php";
 $temas = $_POST["temas"];
 
-$sql = "INSERT INTO temas (temas) VALUES ('$temas')";
+if (isset($temas) && $temas <= 3 && $temas != 0) {
 
+	$sql = "INSERT INTO temas (temas) VALUES ('$temas')";
 
-if ($conexao->query($sql)) {
+	if ($conexao->query($sql)) {
     
-    header("location: index.php");
+    	header("location: /");
    
-  // $sql = "INSERT INTO 'temas' ('temas') VALUES ('temas')";
+   	} else {
+	   	echo "Deu error: " . $sql . "<br>" . $conexao->error;
+	}
+	
+	$conexao->close();
+
 } else {
-    echo "Deu error: " . $sql . "<br>" . $conexao->error;
+
+	header("location: /");
 }
-$conexao->close();
 
 ?>
