@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    
+    // AUTH BASICA TEMPORARIA //
+    var butt = document.getElementById("push");
+    var rad = document.getElementsByClassName("form-check-input");
+
+    butt.onclick = function(){
+        for (var i = rad.length - 1; i >= 0; i--) {
+                    if(rad[i].checked){
+                        localStorage.voto = i;
+                    }
+            }
+    }
+    if (localStorage.voto <= 2) {
+        butt.setAttribute("disabled", "disabled");
+        butt.innerHTML = "Votado!";
+        rad[localStorage.voto].checked = true;
+        for (var i = rad.length - 1; i >= 0; i--) {
+                rad[i].setAttribute("disabled","disabled");
+        }
+    }
+
+   
+</script>
